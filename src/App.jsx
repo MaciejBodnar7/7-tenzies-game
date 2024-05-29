@@ -29,7 +29,11 @@ export default function App() {
   }
 
   function rollDice() {
-    setDice(allNewDice)
+    setDice(prevValue => {
+      return prevValue.map(item => {
+        return item.isHeld ? { ...item } : { id: nanoid(), value: Math.floor(Math.random() * 6) + 1, isHeld: false }
+      })
+    })
   }
 
   return (
